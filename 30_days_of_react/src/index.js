@@ -1,6 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { isPrime } from 'mathjs'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom"
 
 const rootElement = document.getElementById('root')
 const green = "#21BF73"
@@ -21,11 +27,11 @@ function assignColor(index){
 }
 
 function createSquares(){
-  const squares = [];
+  const squares = []
   for (let i=0; i<32;i++) {
     const color = assignColor(i)
     squares.push(
-      <Square color={color} number={i}/>
+      <Link to={"/day/" + i}><Square color={color} number={i}/></Link>
     )
   }
   return squares
@@ -33,14 +39,16 @@ function createSquares(){
 
 const Header = () => (
     <header>
-      <h1>30 Days of React</h1>
+      <Link to="/">
+        <h1>30 Days of React</h1>
+      </Link>
       <h2>Clic on the day you want to have a look on :</h2>
     </header>
   )
 
 const Square = (props) => (
-  <div style={{ width: 50, height: 50, backgroundColor: props.color, marginRight: "1px", marginBottom: "1px" }}>
-    <span style={{ color:"white" }}>{props.number}</span>
+  <div style={{ width: 50, height: 50, backgroundColor: props.color, marginRight: "1px", marginBottom: "1px", display:"flex", alignItems:"center", justifyContent:"center" }}>
+    <div style={{ color:"white" }}>{props.number}</div>
   </div>
 )
 
@@ -53,8 +61,16 @@ const Squares = (props) => (
 
 const App = () => (
   <>
-    <Header />
-    <Squares />
+  <Router >
+    <Header>
+      <Route path="/"/>
+    </Header>
+      <Switch >
+        <Squares>
+          <Route path="/day"/>
+        </Squares>
+      </Switch>
+    </Router>
   </>
 )
 
