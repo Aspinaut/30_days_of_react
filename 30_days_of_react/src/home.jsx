@@ -1,12 +1,10 @@
-import { Squares } from './days/day6'
-
-
+import { Squares, assignHomeColor } from './Square'
 
 export default function Home() {
   return (
     <>
       <h2>Clic on the day you want to have a look on :</h2>
-      <Squares comesFrom="home"/>
+      <Squares days_number={30} colorating_function={assignHomeColor}/>
     </>
   )
 }
