@@ -6,6 +6,16 @@ const green = "#21BF73"
 const yellow = "#FDDB3A"
 const red = "#FD5E53"
 
+function assignRandomColor(index){
+  let str = '0123456789abcdef'
+  let color = ''
+  for (let i = 0; i < 6; i++) {
+    let index = Math.floor(Math.random() * str.length)
+    color += str[index]
+  }
+  return '#' + color
+}
+
 function assignHomeColor(index){
   let color = green
 
@@ -29,7 +39,7 @@ function createSquares(number, putColor){
   const squares = []
   for (let i=1; i<=number;i++) {
     squares.push(
-      <Link to={"/day/" + i}><Square color={putColor(i)} number={i}/></Link>
+      <Link style={{ textDecoration: "none" }}to={"/day/" + i}><Square color={putColor(i)} number={i}/></Link>
     )
   }
   return squares
@@ -55,4 +65,5 @@ export {
   Squares,
   assignColor,
   assignHomeColor,
+  assignRandomColor,
 }
